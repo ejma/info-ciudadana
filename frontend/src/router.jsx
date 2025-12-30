@@ -1,57 +1,69 @@
 import React from 'react';
-import { createBrowserRouter } from 'react-router-dom';
+import { createBrowserRouter, Navigate, Outlet } from 'react-router-dom';
 import { Layout } from './components/Layout';
 import { AgendaPage } from './pages/AgendaPage';
 import { ParliamentPage } from './pages/ParliamentPage';
 import { LegislaturePage } from './pages/LegislaturePage';
-import { SubsidiesPage } from './pages/SubsidiesPage';
-import { ContractingPage } from './pages/ContractingPage';
-import { LegislationPage } from './pages/LegislationPage';
-import { AlertsPage } from './pages/AlertsPage';
-import { CorruptionPage } from './pages/CorruptionPage';
-import { ParticipationPage } from './pages/ParticipationPage';
+import { GovernmentPage } from './pages/GovernmentPage';
+import { ParticipacionPage } from './pages/ParticipacionPage';
+import { ParticipacionDetail } from './pages/ParticipacionDetail';
+import { LoginPage } from './pages/LoginPage';
+import { AdminResourcePage } from './pages/admin/AdminResourcePage';
+import { AuthProvider } from './context/AuthContext';
+
+// Wrapper to provide Context
+const AppWrapper = () => (
+    <AuthProvider>
+        <Outlet />
+    </AuthProvider>
+);
 
 export const router = createBrowserRouter([
     {
-        path: "/",
-        element: <Layout />,
+        element: <AppWrapper />,
         children: [
             {
                 path: "/",
-                element: <AgendaPage />,
-            },
-            {
-                path: "parliament",
-                element: <ParliamentPage />,
-            },
-            {
-                path: "legislature",
-                element: <LegislaturePage />,
-            },
-            {
-                path: "subsidies",
-                element: <SubsidiesPage />,
-            },
-            {
-                path: "contracting",
-                element: <ContractingPage />,
-            },
-            {
-                path: "legislation",
-                element: <LegislationPage />,
-            },
-            {
-                path: "alerts",
-                element: <AlertsPage />,
-            },
-            {
-                path: "corruption",
-                element: <CorruptionPage />,
-            },
-            {
-                path: "participation",
-                element: <ParticipationPage />,
-            },
-        ],
-    },
+                element: <Layout />,
+                children: [
+                    {
+                        index: true,
+                        element: <Navigate to="/agenda" replace />
+                    },
+                    {
+                        path: "agenda",
+                        element: <AgendaPage />
+                    },
+                    {
+                        path: "congreso",
+                        element: <ParliamentPage />
+                    },
+                    {
+                        path: "legislatura",
+                        element: <LegislaturePage />
+                    },
+                    {
+                        path: "gobierno",
+                        element: <GovernmentPage />
+                    },
+                    {
+                        path: "participacion",
+                        element: <ParticipacionPage />
+                    },
+                    {
+                        path: "participacion/:slug",
+                        element: <ParticipacionDetail />
+                    },
+                    {
+                        path: "login",
+                        element: <LoginPage />
+                    },
+                    {
+                        path: "admin/resources",
+                        element: <AdminResourcePage />
+                    }
+                ]
+            }
+        ]
+    }
 ]);

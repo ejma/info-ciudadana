@@ -35,3 +35,7 @@ Funcionalidades:
 
 
 // Se trata de un proyecto en construcción que puede ir variando en su enfoque y funcionalidades, cuyo objetivo es facilitar la participación ciudadana en el proceso legislativo y la transparencia de los gobiernos.
+
+## Cómo ejecutar el proyecto
+
+Para instrucciones detalladas sobre cómo compilar y lanzar el proyecto (backend y frontend), por favor consulta el archivo [RUNNING.md](./RUNNING.md).
